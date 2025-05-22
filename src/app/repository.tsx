@@ -60,11 +60,13 @@ export function RepositoryClient({ query_param, results, total, currentPage }: {
         </div>
       </div>
 
-      <div className="relative max-w-7xl w-full flex mx-auto mt-20 z-0">
-        <span className="text-gray-200 text-sm">
-          {count} results found for <span className="font-bold">{query}</span>
-        </span>
-      </div>
+      {query && count && (
+        <div className="relative max-w-7xl w-full flex mx-auto mt-20 z-0">
+          <span className="text-gray-200 text-sm">
+            {count} results found for <span className="font-bold">{query}</span>
+          </span>
+        </div>
+      )}
 
       <div className="w-full min-h-[101vh] h-full max-w-7xl flex mx-auto pt-20 pb-10 text-gray-200">
         {loading ? (

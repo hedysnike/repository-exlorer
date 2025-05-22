@@ -84,6 +84,11 @@ export function useRepositorySearch({
     search(query, sort, page);
   }, [query, sort, page, search]);
 
+  useEffect(() => {
+    setPage(initialPage);
+  }, [query]);
+
+
   return {
     query,
     setQuery,
