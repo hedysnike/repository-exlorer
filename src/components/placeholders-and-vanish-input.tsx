@@ -7,10 +7,14 @@ import { cn } from "@/lib/utils";
 // ეს კომპონენტი წამოვიღე აქედან https://ui.aceternity.com/components/placeholders-and-vanish-input
 
 export function PlaceholdersAndVanishInput({
+  value,
+  setValue,
   placeholders,
   onChange,
   onSubmit,
 }: {
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
   placeholders: string[];
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -47,7 +51,6 @@ export function PlaceholdersAndVanishInput({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const newDataRef = useRef<any[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
-  const [value, setValue] = useState("");
   const [animating, setAnimating] = useState(false);
 
   const draw = useCallback(() => {

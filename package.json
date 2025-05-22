@@ -9,11 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@langchain/core": "^0.3.56",
+    "@langchain/openai": "^0.5.10",
+    "@prisma/client": "^6.8.2",
     "clsx": "^2.1.1",
+    "framer-motion": "^12.12.1",
+    "langchain": "^0.3.26",
     "lucide-react": "^0.511.0",
     "motion": "^12.12.1",
     "next": "15.3.2",
     "nuqs": "^2.4.3",
+    "prisma": "^6.8.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "simplex-noise": "^4.0.3",

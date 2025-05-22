@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const response = await fetch(`https://api.github.com/search/repositories?q=${encodeURIComponent(query)}&sort=${sort}`, {
+    const response = await fetch(`https://api.github.com/search/repositories?q=${encodeURIComponent(query)}&sort=${sort}&per_page=100`, {
       headers: {
         Authorization: `token ${GITHUB_TOKEN}`,
         Accept: "application/vnd.github+json",
@@ -21,13 +21,14 @@ export async function POST(request: NextRequest) {
 
     const data = await response.json();
 
-    console.log(data.items[0].owner);
+    console.log(data.items[0]);
 
     return NextResponse.json({
-      total: data.total_count,
-      repos: data.items,
+      total_count: data.total_count,
+      items: data.items,
     });
   } catch (err) {
+    console.error(err);
     return NextResponse.json({ error: "GitHub API request failed." }, { status: 500 });
   }
 }
