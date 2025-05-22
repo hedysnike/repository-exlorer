@@ -6,13 +6,14 @@ export async function POST(request: NextRequest) {
   const body = await request.json();
   const query = body.query;
   const sort = body.sort;
+  const page = body.page;
 
   if (!query) {
     return NextResponse.json({ error: "Empty Request..." }, { status: 400 });
   }
 
   try {
-    const response = await fetch(`https://api.github.com/search/repositories?q=${encodeURIComponent(query)}&sort=${sort}&per_page=100`, {
+    const response = await fetch(`https://api.github.com/search/repositories?q=${encodeURIComponent(query)}&${sort ? `sort=${sort}` : ""}${page ? `&page=${page}` : ""}`, {
       headers: {
         Authorization: `token ${GITHUB_TOKEN}`,
         Accept: "application/vnd.github+json",
@@ -20,8 +21,6 @@ export async function POST(request: NextRequest) {
     });
 
     const data = await response.json();
-
-    console.log(data.items[0]);
 
     return NextResponse.json({
       total_count: data.total_count,
