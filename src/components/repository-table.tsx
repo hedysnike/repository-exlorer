@@ -13,9 +13,9 @@ export function RepositoryTable({ repositories }: { repositories: GithubReposito
     <table className="w-full border-collapse border rounded border-gray-700/50">
       <thead>
         <tr>
-          <th className="border-x border-t border-gray-700/50 p-2">Name</th>
-          <th className="border-x border-t border-gray-700/50 p-2">Description</th>
-          <th className="border-x border-t border-gray-700/50 p-2">Actions</th>
+          <RepositoryTableItem title="Name" />
+          <RepositoryTableItem title="Description" />
+          <RepositoryTableItem title="Actions" />
         </tr>
       </thead>
       {repositories.map((item: GithubRepository) => {
@@ -61,4 +61,8 @@ export function RepositoryTable({ repositories }: { repositories: GithubReposito
       })}
     </table>
   );
+}
+
+function RepositoryTableItem({ title }: { title: string }) {
+  return <th className="border-x border-t border-gray-700/50 p-2">{title}</th>;
 }
