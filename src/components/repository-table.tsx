@@ -23,7 +23,7 @@ export function RepositoryTable({ repositories }: { repositories: GithubReposito
           <tr key={item.name} className="text-xs hover:bg-gray-800/30 transition-all duration-300">
             <td className="border-t border-r border-l border-gray-600 py-1.5 px-4 font-medium text-gray-100">
               <img src={item.owner.avatar_url} alt={item.owner.login} className="w-10 h-10" />
-              <div className="flex text-base items-center gap-2 w-max">{item.name}</div>
+              <div className="flex items-center gap-2 w-max font-semibold truncate text-white text-lg">{item.name}</div>
               <div className="font-light text-gray-400 text-sm">[{item.language}]</div>
             </td>
             <td className="border-t border-gray-600 p-2 text-gray-300 flex-1 text-ellipsis line-clamp-3 ">{item.description}</td>
