@@ -2,8 +2,11 @@
 import { GithubRepository } from "@/lib/types";
 import { ArrowUpRightIcon, Eye, Github, Star } from "lucide-react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 export function RepositoryTable({ repositories }: { repositories: GithubRepository[] }) {
+  const searchParams = useSearchParams();
+
   return (
     <table className="w-full border-collapse border rounded border-gray-600">
       <thead>
@@ -47,7 +50,7 @@ export function RepositoryTable({ repositories }: { repositories: GithubReposito
               </div>
             </td>
             <td className="border border-gray-600 p-2 text-gray-300 ">
-              <Link href={`/repository/${item.owner.login}/${item.name}`} className="bg-gray-400 flex items-center gap-2 text-black px-2 py-1 rounded-md">
+              <Link href={`/repository/${item.owner.login}/${item.name}?${searchParams}`} className="bg-gray-400 flex items-center gap-2 text-black px-2 py-1 rounded-md">
                 <span>Analyze</span>
                 <ArrowUpRightIcon className="w-4 h-4" />
               </Link>
