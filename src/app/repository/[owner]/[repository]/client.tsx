@@ -1,9 +1,11 @@
 "use client";
 
-import { Copy, Check, Code, ExternalLink, Eye, GitFork, Star, User, Calendar } from "lucide-react";
+import { Copy, Check, Code, ExternalLink, Eye, GitFork, Star, User, Calendar, Tags } from "lucide-react";
 import { GithubRepository } from "./types";
 import { useState, useEffect } from "react";
 import { CopyButton } from "@/components/copy-button";
+import { formatNumber } from "@/lib/utils";
+import { Tag } from "@/components/tag";
 
 export function Client({ repository }: { repository: GithubRepository }) {
   const [copied, setCopied] = useState(false);
@@ -19,13 +21,6 @@ export function Client({ repository }: { repository: GithubRepository }) {
       month: "long",
       day: "numeric",
     });
-  };
-
-  const formatNumber = (num: number) => {
-    if (num >= 1000) {
-      return (num / 1000).toFixed(1) + "k";
-    }
-    return num.toString();
   };
 
   const copyToClipboard = async (text: string) => {
@@ -151,12 +146,7 @@ export function Client({ repository }: { repository: GithubRepository }) {
               <h3 className="text-xl font-semibold mb-6">Topics</h3>
               <div className="flex flex-wrap gap-3">
                 {repository.topics.map((topic, index) => (
-                  <span
-                    key={index}
-                    className="px-3 py-1 bg-indigo-600 border border-indigo-500/30 rounded-full text-sm font-medium hover:from-indigo-600/30 hover:to-indigo-600/30 transition-all duration-200 cursor-pointer"
-                  >
-                    #{topic}
-                  </span>
+                  <Tag key={index}>#{topic}</Tag>
                 ))}
               </div>
             </div>
