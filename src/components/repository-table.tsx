@@ -10,23 +10,23 @@ export function RepositoryTable({ repositories }: { repositories: GithubReposito
   const searchParams = useSearchParams();
 
   return (
-    <table className="w-full border-collapse border rounded border-gray-600">
+    <table className="w-full border-collapse border rounded border-gray-700/50">
       <thead>
         <tr>
-          <th className="border-x border-t border-gray-600 p-2">Name</th>
-          <th className="border-x border-t border-gray-600 p-2">Description</th>
-          <th className="border-x border-t border-gray-600 p-2">Actions</th>
+          <th className="border-x border-t border-gray-700/50 p-2">Name</th>
+          <th className="border-x border-t border-gray-700/50 p-2">Description</th>
+          <th className="border-x border-t border-gray-700/50 p-2">Actions</th>
         </tr>
       </thead>
       {repositories.map((item: GithubRepository) => {
         return (
           <tr key={item.name} className="text-xs hover:bg-gray-800/30 transition-all duration-300">
-            <td className="border-t border-r border-l border-gray-600 py-1.5 px-4 font-medium text-gray-100">
+            <td className="border-t border-r border-l border-gray-700/50 py-1.5 px-4 font-medium text-gray-100">
               <img src={item.owner.avatar_url} alt={item.owner.login} className="w-10 h-10" />
               <div className="flex items-center gap-2 w-max font-semibold truncate text-white text-lg">{item.name}</div>
               <div className="font-light text-gray-400 text-sm">[{item.language}]</div>
             </td>
-            <td className="border-t border-gray-600 p-2 text-gray-300 flex-1 text-ellipsis line-clamp-3 ">{item.description}</td>
+            <td className="border-t border-gray-700/50 p-2 text-gray-300 flex-1 text-ellipsis line-clamp-3 ">{item.description}</td>
             <td className="flex-shrink-0 p-2 text-gray-300 flex gap-2 h-max">
               <div className="flex items-center gap-2 overflow-x-hidden">
                 <Tag>
@@ -48,7 +48,7 @@ export function RepositoryTable({ repositories }: { repositories: GithubReposito
                 </div>
               </div>
             </td>
-            <td className="border border-gray-600 p-2 text-gray-300 ">
+            <td className="border border-gray-700/50 p-2 text-gray-300 ">
               <button className="bg-indigo-500 brightness-75 hover:brightness-100  transition-all duration-200 py-2 mb-5 text-black w-full rounded-md">
                 <Link href={`/repository/${item.owner.login}/${item.name}?${searchParams}`} className="flex items-center gap-2 px-4 w-full">
                   <span>View</span>
