@@ -18,7 +18,7 @@ export default async function Home({ searchParams }: Props) {
   let formattedQuery: string | undefined;
   if (!!query) {
     formattedQuery = query.toString().trim().replace(/\s+/g, " ");
-    console.log(`https://api.github.com/search/repositories?q=${encodeURIComponent(formattedQuery)}${sort ? `&sort=${sort}` : ""}${page && `&page=${page}`}`);
+    console.log(`REQUEST:`, formattedQuery, sort, page);
     const response = await fetch(`https://api.github.com/search/repositories?q=${encodeURIComponent(formattedQuery)}${sort ? `&sort=${sort}` : ""}${page && `&page=${page}`}`, {
       headers: {
         Authorization: `token ${GITHUB_TOKEN}`,

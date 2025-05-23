@@ -8,6 +8,8 @@ export async function POST(request: NextRequest) {
   const sort = body.sort;
   const page = body.page;
 
+  console.log(`REQUEST:`, query, sort, page);
+
   if (!query) {
     return NextResponse.json({ error: "Empty Request..." }, { status: 400 });
   }
@@ -21,6 +23,7 @@ export async function POST(request: NextRequest) {
     });
 
     const data = await response.json();
+    console.log(`RESPONSE LENGTH:`, data.items.length);
 
     return NextResponse.json({
       total_count: data.total_count,
