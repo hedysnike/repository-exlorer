@@ -18,7 +18,7 @@ export function RepositoryTable({ repositories }: { repositories: GithubReposito
       </thead>
       {repositories.map((item: GithubRepository) => {
         return (
-          <tr key={item.name} className="text-xs">
+          <tr key={item.name} className="text-xs hover:bg-gray-800/30 transition-all duration-300">
             <td className="border border-gray-600 py-1.5 px-4 font-medium text-gray-100">
               <img src={item.owner.avatar_url} alt={item.owner.login} className="w-10 h-10" />
               <div className="flex text-base items-center gap-2 w-max">{item.name}</div>
@@ -28,21 +28,17 @@ export function RepositoryTable({ repositories }: { repositories: GithubReposito
             <td className="border border-gray-600  flex-shrink-0 p-2 text-gray-300 flex gap-2 h-full">
               {/* <CopyButton url={item.url} /> */}
               <div className="flex items-center gap-2 overflow-x-hidden">
-                <a target="_blank" href={item.url} className="bg-gray-400 flex items-center gap-2 text-black px-2 py-1 rounded-md">
+                <a target="_blank" href={item.url} className="bg-gray-800/50 flex items-center gap-2 text-white  border-gray-600 border-[0.5px] px-2 py-1 rounded-md">
                   <span>Visit</span>
                   <Github className="w-4 h-4" />
                 </a>
-                <div className="bg-gray-600 flex items-center gap-2 text-black px-2 py-1 rounded-md">
+                <div className="bg-gray-800/50 flex items-center gap-2 text-white  border-gray-600 border-[0.5px] px-2 py-1 rounded-md">
                   ({item.stargazers_count}) <Star className="w-4 h-4 text-green-500 mr-1" />
-                </div>
-
-                <div className="bg-gray-600 flex items-center gap-2 text-black px-2 py-1 rounded-md">
-                  ({item.watchers_count}) <Eye className="w-4 h-4 text-green-500 mr-1" />
                 </div>
 
                 <div className="flex max-w-prose items-center gap-2 overflow-x-hidden">
                   {item.topics.map((topic) => (
-                    <div key={topic} className="bg-gray-400 text-black px-2 py-1 rounded-md">
+                    <div key={topic} className="bg-indigo-700 border-indigo-900 border-[0.5px] hover:brightness-100 hover:bg-indigo-600 brightness-70 text-white px-2 py-1 rounded-md">
                       {topic}
                     </div>
                   ))}

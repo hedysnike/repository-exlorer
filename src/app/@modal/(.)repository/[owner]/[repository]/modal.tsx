@@ -24,7 +24,7 @@ export function RepositoryModal({ isAvailable = true, children }: RepositoryModa
         <Dialog.Overlay className="absolute inset-0 bg-black/80 z-50 pointer-events-none">
           <div className="fixed inset-0 overflow-y-auto h-[100dvh] z-50 w-full">
             <div className="flex relative items-start py-6 justify-center text-center">
-              <Dialog.Content className="relative md:py-6 text-left align-middle md:rounded-xl w-full md:max-w-[1050px] bg-white">
+              <Dialog.Content className="relative md:py-6 text-left align-middle md:rounded-xl w-full max-w-[920px] bg-[#111111]">
                 <Dialog.Title />
                 {children}
               </Dialog.Content>

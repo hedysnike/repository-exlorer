@@ -79,7 +79,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
             onClick={() => {
               onFilterChange(), onPageChange(page);
             }}
-            className={`px-3 py-1 rounded-lg ${page === currentPage ? "bg-[#3DE395] text-black font-medium" : "hover:bg-gray-900"}`}
+            className={`px-3 py-1 rounded-lg ${page === currentPage ? "bg-gray-500/50 text-white font-medium" : "hover:bg-gray-300 text-black"}`}
           >
             {page}
           </button>
