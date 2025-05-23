@@ -118,3 +118,26 @@ export interface ResultData {
   total_count: number;
   items: GithubRepository[];
 }
+
+
+export type GitHubSearchFiltersType = {
+  language?: (typeof GITHUB_LANGUAGES)[number];
+  stars?: string;
+  forks?: string;
+  created?: string;
+  pushed?: string;
+  user?: string;
+  org?: string;
+  topic?: string;
+  license?: (typeof GITHUB_LICENSES)[number];
+  archived?: boolean;
+  is?: (typeof GITHUB_IS_FLAGS)[number];
+};
+
+export const GitHubSearchFilterKeys: (keyof GitHubSearchFiltersType)[] = ["language", "stars", "forks", "created", "pushed", "user", "org", "topic", "license", "archived", "is"] as const;
+
+export const GitHubSearchFilters = Object.keys(GitHubSearchFilterKeys);
+
+const GITHUB_LANGUAGES = ["JavaScript", "TypeScript", "Python", "Java", "C#", "C++", "Go", "Ruby", "PHP", "Swift", "Kotlin", "Rust", "Dart", "Shell", "HTML", "CSS"];
+const GITHUB_LICENSES = ["mit", "gpl-3.0", "apache-2.0", "bsd-2-clause", "bsd-3-clause", "unlicense", "mpl-2.0", "lgpl-3.0", "epl-2.0", "agpl-3.0"];
+const GITHUB_IS_FLAGS = ["public", "private", "fork", "mirror", "archived", "template"];

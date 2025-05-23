@@ -5,7 +5,7 @@ import { RepositoryClient } from "./repository";
 interface Props {
   searchParams: Promise<{
     query: string;
-    sort?: string;
+    sort?: "asc" | "desc";
     page?: string;
     columns?: "grid" | "table";
   }>;

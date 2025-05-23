@@ -69,7 +69,7 @@ export function RepositoryClient({
             }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
           >
-            <PlaceholdersAndVanishInput setValue={setQuery} value={query} placeholders={placeholders} onChange={handleChange} onSubmit={() => {}} />
+            <PlaceholdersAndVanishInput setValue={setQuery} value={query} placeholders={placeholders} onChange={handleChange} />
           </motion.div>
         </div>
       </div>
@@ -80,6 +80,10 @@ export function RepositoryClient({
             {count} results found for <span className="font-bold">{query}</span>
           </span>
           <div className="flex items-center gap-2">
+            <select name="columns" id="columns" onChange={(e) => setSort(e.target.value)} className="py-1.5 px-4 rounded-lg text-gray-300 bg-gray-800">
+              <option value="asc">Ascending</option>
+              <option value="desc">Descending</option>
+            </select>
             <button onClick={() => setColumns("grid")} className={`p-2 rounded-lg text-gray-300 ${columns === "grid" ? "bg-indigo-500" : ""}`}>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="1" y="1" width="8" height="8" rx="1" stroke="currentColor" strokeWidth="2" />
@@ -113,14 +117,16 @@ export function RepositoryClient({
       </div>
 
       <section className="pb-96 text-white">
-        <Pagination
-          currentPage={Number(page)}
-          totalPages={Math.ceil(count / 100)}
-          onPageChange={(page) => {
-            setPage(page.toString());
-            refetch();
-          }}
-        />
+        {count > 0 && (
+          <Pagination
+            currentPage={Number(page)}
+            totalPages={Math.ceil(count / 100)}
+            onPageChange={(page) => {
+              setPage(page.toString());
+              refetch();
+            }}
+          />
+        )}
       </section>
     </div>
   );

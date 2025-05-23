@@ -5,8 +5,8 @@ const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 export async function POST(request: NextRequest) {
   const body = await request.json();
   const query = body.query;
-  const sort = body.sort;
-  const page = body.page;
+  const sort = body.sort as "asc" | "desc" | undefined;
+  const page = body.page as string | undefined;
 
   console.log(`REQUEST:`, query, sort, page);
 
@@ -15,8 +15,9 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const response = await fetch(`https://api.github.com/search/repositories?q=${encodeURIComponent(query)}&${sort ? `sort=${sort}` : ""}${page ? `&page=${page}` : ""}`, {
+    const response = await fetch(`https://api.github.com/search/repositories?q=${encodeURIComponent(query)}&${sort ? `order=${sort}` : ""}${page ? `&page=${page}` : ""}`, {
       headers: {
+        "X-GitHub-Api-Version": "2022-11-28",
         Authorization: `token ${GITHUB_TOKEN}`,
         Accept: "application/vnd.github+json",
       },

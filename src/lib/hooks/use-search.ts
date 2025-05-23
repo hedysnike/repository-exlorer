@@ -42,7 +42,9 @@ export function useRepositorySearch({
   const [page, setPage] = useQueryState("page", {
     defaultValue: initialPage,
   });
-  const [sort, setSort] = useState(initialSort);
+  const [sort, setSort] = useQueryState("sort", {
+    defaultValue: initialSort,
+  });
   const [columns, setColumns] = useQueryState("columns", {
     defaultValue: initialColumns,
   });
