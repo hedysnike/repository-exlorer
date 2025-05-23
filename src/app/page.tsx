@@ -4,14 +4,17 @@ import { RepositoryClient } from "./repository";
 
 interface Props {
   searchParams: Promise<{
-    [key: string]: string | string[] | undefined;
+    query: string;
+    sort?: string;
+    page?: string;
+    columns?: "grid" | "table";
   }>;
 }
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
 export default async function Home({ searchParams }: Props) {
-  const { query, sort, page } = await searchParams;
+  const { query, sort, page, columns } = await searchParams;
 
   let data: ResultData = { items: [], total_count: 0 };
 
@@ -31,7 +34,7 @@ export default async function Home({ searchParams }: Props) {
 
   return (
     <div className="bg-[#111111] flex flex-col justify-center relative min-h-screen overflow-x-hidden">
-      <RepositoryClient query_param={formattedQuery} results={data.items} total={data.total_count} currentPage={parseInt(page?.toString() || "1")} />
+      <RepositoryClient query_param={formattedQuery} results={data.items} total={data.total_count} currentPage={parseInt(page?.toString() || "1")} initialColumns={columns} />
       <Spotlight />
     </div>
   );

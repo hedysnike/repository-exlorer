@@ -6,6 +6,7 @@ import { GithubRepository } from "@/lib/types";
 import { Pagination } from "@/components/pagination";
 import { RepositoryTable } from "@/components/repository-table";
 import { useRepositorySearch } from "@/lib/hooks/use-search";
+import { RepositoryGrid } from "@/components/repository-grid";
 
 const placeholders = [
   "What's the first rule of Fight Club?",
@@ -15,11 +16,24 @@ const placeholders = [
   "How to assemble your own PC?",
 ];
 
-export function RepositoryClient({ query_param, results, total, currentPage }: { query_param?: string; results: GithubRepository[]; total: number; currentPage: number }) {
-  const { query, setQuery, page, setPage, repositories, count, sort, setSort, refetch, loading } = useRepositorySearch({
+export function RepositoryClient({
+  query_param,
+  results,
+  total,
+  currentPage,
+  initialColumns,
+}: {
+  query_param?: string;
+  results: GithubRepository[];
+  total: number;
+  currentPage: number;
+  initialColumns?: "grid" | "table";
+}) {
+  const { query, setQuery, page, setPage, columns, setColumns, repositories, count, sort, setSort, refetch, loading } = useRepositorySearch({
     initialQuery: query_param,
     initialPage: currentPage.toString(),
     initialTotal: total,
+    initialColumns: initialColumns,
   });
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,11 +74,27 @@ export function RepositoryClient({ query_param, results, total, currentPage }: {
         </div>
       </div>
 
-      {query && count && (
-        <div className="relative max-w-7xl w-full flex mx-auto mt-20 z-0">
+      {query && count > 0 && (
+        <div className="relative justify-between items-center max-w-7xl w-full flex mx-auto mt-20 z-0">
           <span className="text-gray-200 text-sm">
             {count} results found for <span className="font-bold">{query}</span>
           </span>
+          <div className="flex items-center gap-2">
+            <button onClick={() => setColumns("grid")} className={`p-2 rounded-lg text-gray-300 ${columns === "grid" ? "bg-indigo-500" : ""}`}>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="1" y="1" width="8" height="8" rx="1" stroke="currentColor" strokeWidth="2" />
+                <rect x="11" y="1" width="8" height="8" rx="1" stroke="currentColor" strokeWidth="2" />
+                <rect x="1" y="11" width="8" height="8" rx="1" stroke="currentColor" strokeWidth="2" />
+                <rect x="11" y="11" width="8" height="8" rx="1" stroke="currentColor" strokeWidth="2" />
+              </svg>
+            </button>
+            <button onClick={() => setColumns("table")} className={`p-2 rounded-lg text-gray-300 ${columns === "table" ? "bg-indigo-500" : ""}`}>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="1" y="1" width="18" height="8" rx="1" stroke="currentColor" strokeWidth="2" />
+                <rect x="1" y="11" width="18" height="8" rx="1" stroke="currentColor" strokeWidth="2" />
+              </svg>
+            </button>
+          </div>
         </div>
       )}
 
@@ -72,7 +102,11 @@ export function RepositoryClient({ query_param, results, total, currentPage }: {
         {loading ? (
           <div className="flex items-center justify-center h-full">Loading...</div>
         ) : repositories.length > 0 ? (
-          <RepositoryTable repositories={repositories} />
+          columns === "grid" ? (
+            <RepositoryGrid repositories={repositories} />
+          ) : (
+            <RepositoryTable repositories={repositories} />
+          )
         ) : query ? (
           <div className="flex items-center justify-center h-full min-h-screen">No results found</div>
         ) : null}

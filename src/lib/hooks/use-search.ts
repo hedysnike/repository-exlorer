@@ -28,11 +28,13 @@ export function useRepositorySearch({
   initialSort = "asc",
   initialPage = "1",
   initialTotal = 0,
+  initialColumns = "table",
 }: {
   initialQuery?: string;
   initialSort?: string;
   initialPage?: string;
   initialTotal?: number;
+  initialColumns?: "grid" | "table";
 }) {
   const [query, setQuery] = useQueryState("query", {
     defaultValue: initialQuery,
@@ -41,6 +43,9 @@ export function useRepositorySearch({
     defaultValue: initialPage,
   });
   const [sort, setSort] = useState(initialSort);
+  const [columns, setColumns] = useQueryState("columns", {
+    defaultValue: initialColumns,
+  });
 
   const [repositories, setRepositories] = useState<GithubRepository[]>([]);
   const [count, setCount] = useState<number>(initialTotal);
@@ -88,7 +93,6 @@ export function useRepositorySearch({
     setPage(initialPage);
   }, [query]);
 
-
   return {
     query,
     setQuery,
@@ -96,6 +100,8 @@ export function useRepositorySearch({
     setSort,
     page,
     setPage,
+    columns,
+    setColumns,
     repositories,
     count,
     loading,
