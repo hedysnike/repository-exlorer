@@ -1,6 +1,6 @@
 "use client";
 
-import { Copy, Check, Code, ExternalLink, Eye, GitFork, Star, User, Calendar, Tags } from "lucide-react";
+import { Copy, Check, Code, ExternalLink, Eye, GitFork, Star, User } from "lucide-react";
 import { GithubRepository } from "./types";
 import { useState, useEffect } from "react";
 import { CopyButton } from "@/components/copy-button";

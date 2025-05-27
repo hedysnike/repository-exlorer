@@ -1,6 +1,5 @@
 import { Client } from "@/app/repository/[owner]/[repository]/client";
 import { GithubRepository } from "@/app/repository/[owner]/[repository]/types";
-import { Modal, ModalBody, ModalContent, ModalFooter, ModalTrigger } from "@/components/animated-modal";
 import { RepositoryModal } from "./modal";
 
 interface Props {

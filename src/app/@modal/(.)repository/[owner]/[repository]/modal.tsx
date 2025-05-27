@@ -1,10 +1,8 @@
 "use client";
 
-import React, { useRef } from "react";
+import React from "react";
 import { useRouter } from "next/navigation";
 import * as Dialog from "@radix-ui/react-dialog";
-import { motion } from "framer-motion";
-import { X } from "lucide-react";
 
 interface RepositoryModalProps {
   isAvailable?: boolean;
